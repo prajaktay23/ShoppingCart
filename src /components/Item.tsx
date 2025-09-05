@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
+import React, { useCallback } from 'react'
 import CustomButton from './CustomButton'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../state/cartSlice'
 
 type ItemProps = {
     data: {
@@ -10,20 +12,25 @@ type ItemProps = {
         image: string
     }
 }
-const Item = ({ data }: ItemProps) => {
+const Item = React.memo(({ data }: ItemProps) => {
+    const dispatch = useDispatch();
 
-    const handleAddToCart = () => {
+    const handleAddToCart = useCallback(() => {
         console.log(`Added ${data.title} to cart`);
+        dispatch(addToCart(data));
 
-    }
+    }, [data, dispatch]);
+
     return (
         <View style={styles.container}>
             <Image src={data.image} style={styles.image} />
             <Text style={styles.title}>{data.title}</Text>
-            <CustomButton onClick={() => handleAddToCart()} />
+            <Text style={styles.title}>{data.price}</Text>
+
+            <CustomButton onClick={() => handleAddToCart()} title={"Add to Cart"} style={styles.addCartButton} />
         </View>
     )
-}
+});
 
 export default Item
 
@@ -33,11 +40,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomWidth: 1,
-        borderBottomColor: '#ccc',
         padding: 10,
         borderWidth: 1,
         borderRadius: 5,
-        margin: 5
+        margin: 5,
     },
     image: {
         width: 100,
@@ -47,5 +53,9 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         fontWeight: 'bold'
+    },
+    addCartButton: {
+        backgroundColor: '#f9ce0d',
+
     }
 })

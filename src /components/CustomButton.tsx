@@ -1,14 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 type CustomButtonProps = {
-    onClick?: () => void
+    onClick?: () => void;
+    title?: string;
+    style?: object;
 }
 
-const CustomButton = ({ onClick }: CustomButtonProps) => {
+const CustomButton = ({ onClick, title, style }: CustomButtonProps) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <TouchableOpacity onPress={onClick}>
-                <Text>CustomButton</Text>
+                <Text>{title}</Text>
             </TouchableOpacity>
         </View>
     )
@@ -20,9 +22,10 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: 50,
+        height: 45,
         width: '90%',
-        backgroundColor: '#ddd',
-        borderRadius: 5
+        borderRadius: 5,
+        backgroundColor: '#1d6ef1',
+        margin: 10,
     }
 })

@@ -3,12 +3,22 @@ import React, { useMemo } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { generateMockData } from '../utils/mockItemData'
 import Item from '../components/Item'
+import NavBar from '../components/NavBar'
 
-const ProductScreen = () => {
+const ProductScreen = ({ navigation }) => {
     const data = useMemo(() => generateMockData(5000), []);
+
+    const renderRightAccesory = () => {
+        console.log("Right Accesory Pressed");
+        navigation.navigate('Cart');
+    }
 
     return (
         <SafeAreaView style={styles.constainer}>
+            <NavBar
+                title="Products"
+                renderRightAccesory={renderRightAccesory} imageName="opencart"
+            />
             <FlatList
                 keyExtractor={(item) => item.id.toString()}
                 data={data}
@@ -19,6 +29,8 @@ const ProductScreen = () => {
                 maxToRenderPerBatch={20}
                 windowSize={21}
                 style={styles.list}
+                contentContainerStyle={styles.listContent}
+                columnWrapperStyle={styles.column}
             />
 
         </SafeAreaView>
@@ -31,7 +43,18 @@ const styles = StyleSheet.create({
     constainer: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#f9f9f9'
     },
-    list: { width: '100%' }
+    list: {
+        width: '100%',
+    },
+    listContent: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: '#fff',
+    },
+    column: {
+        justifyContent: "space-around",
+    },
 })

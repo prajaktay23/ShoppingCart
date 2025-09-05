@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 - 5th-Sept-2025
+
+# Added
+- created store for cart items
+- added cart screen
+- showing added items in the cart list and total price
+- created comman nav bar
+
 ## 1.0.0 - 4th-Sept-2025
 
 # Added
