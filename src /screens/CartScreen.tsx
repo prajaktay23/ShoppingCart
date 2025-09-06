@@ -3,12 +3,15 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import NavBar from '../components/NavBar'
 import { useSelector } from 'react-redux'
+// import { useNavigation } from '@react-navigation/native'
 
 const CartScreen = () => {
+    // const navigation = useNavigation();
 
     const items = useSelector((state: any) => state.cart.items);
     console.log("Cart Items: ", items);
-    const total = items.reduce((acc: number, item: { price: number }) => acc + item.price, "");
+    const total = items.reduce((acc: number, item: any) => acc + item?.price, 0);
+
 
     const renderAddToCartList = () => {
         console.log("Add to cart pressed");
@@ -46,6 +49,8 @@ export default CartScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#c3daf6",
+
     },
     emptyCart: {
         fontSize: 18,

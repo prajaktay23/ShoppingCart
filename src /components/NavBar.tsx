@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { Fontisto } from "@react-native-vector-icons/fontisto";
 
@@ -10,10 +10,15 @@ type Props = {
 const NavBar = ({ title, renderRightAccesory, imageName }: Props) => {
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity style={styles.rightAccesory} onPress={renderRightAccesory}>
-                <Fontisto name={imageName} size={20} />
-            </TouchableOpacity>
+            {
+                imageName &&
+                <TouchableOpacity style={styles.rightAccesory} onPress={renderRightAccesory}>
+                    <Fontisto name={imageName} size={20} />
+                </TouchableOpacity>
+            }
+
         </View>
     )
 }
@@ -26,7 +31,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fce994',
+        backgroundColor: '#ffffff',
         marginBottom: 10,
         borderBottomEndRadius: 10,
         borderBottomStartRadius: 10,

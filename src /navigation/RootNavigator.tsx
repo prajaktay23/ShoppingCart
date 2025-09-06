@@ -1,15 +1,17 @@
-import React from 'react'
-import ProductScreen from '../screens/ProductScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import CartScreen from '../screens/CartScreen';
+import ProductNavigator from './ProductNavigator';
+import AuthNavigator from './AuthNavigator';
+import SplashScreen from '../screens/SplashScreen';
+import { RootStackParamList } from '../types/navigation';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigator = () => {
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='Product'>
-            <Stack.Screen name="Product" component={ProductScreen} />
-            <Stack.Screen name="Cart" component={CartScreen} />
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Splash">
+            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Auth" component={AuthNavigator} />
+            <Stack.Screen name="Product" component={ProductNavigator} />
         </Stack.Navigator>
     )
 }

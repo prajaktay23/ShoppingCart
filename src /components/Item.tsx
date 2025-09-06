@@ -27,7 +27,7 @@ const Item = React.memo(({ data }: ItemProps) => {
             <Text style={styles.title}>{data.title}</Text>
             <Text style={styles.title}>{data.price}</Text>
 
-            <CustomButton onClick={() => handleAddToCart()} title={"Add to Cart"} style={styles.addCartButton} />
+            <CustomButton onClick={() => handleAddToCart()} title={"Add to Cart"} />
         </View>
     )
 });
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         margin: 5,
+        backgroundColor: '#fff'
     },
     image: {
         width: 100,
@@ -54,8 +55,4 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    addCartButton: {
-        backgroundColor: '#f9ce0d',
-
-    }
 })

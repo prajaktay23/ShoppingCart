@@ -4,8 +4,18 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { generateMockData } from '../utils/mockItemData'
 import Item from '../components/Item'
 import NavBar from '../components/NavBar'
+import { useNavigation } from '@react-navigation/native'
+import { ProductStackParamList } from '../types/navigation'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-const ProductScreen = ({ navigation }) => {
+type ProductScreenNavigationProp = NativeStackNavigationProp<
+    ProductStackParamList,
+    'Cart'
+>;
+
+const ProductScreen = () => {
+    const navigation = useNavigation<ProductScreenNavigationProp>();
+
     const data = useMemo(() => generateMockData(5000), []);
 
     const renderRightAccesory = () => {
@@ -44,7 +54,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f9f9f9'
+        backgroundColor: "#c3daf6",
+
     },
     list: {
         width: '100%',
@@ -52,7 +63,7 @@ const styles = StyleSheet.create({
     listContent: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: '#fff',
+        backgroundColor: "#c3daf6",
     },
     column: {
         justifyContent: "space-around",
