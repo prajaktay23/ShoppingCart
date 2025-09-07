@@ -6,8 +6,10 @@ type Props = {
     title: string;
     renderRightAccesory?: () => void;
     imageName?: string | undefined;
+    renderBackNav?: boolean | false;
+    backNavigation?: () => void;
 }
-const NavBar = ({ title, renderRightAccesory, imageName }: Props) => {
+const NavBar = ({ title, renderRightAccesory, imageName, renderBackNav, backNavigation }: Props) => {
     return (
         <View style={styles.container}>
             <StatusBar
@@ -15,13 +17,22 @@ const NavBar = ({ title, renderRightAccesory, imageName }: Props) => {
                 backgroundColor="transparent"
                 barStyle="dark-content"
             />
-            <Text style={styles.title}>{title}</Text>
-            {
-                imageName &&
-                <TouchableOpacity style={styles.rightAccesory} onPress={renderRightAccesory}>
-                    <Fontisto name={imageName} size={20} />
-                </TouchableOpacity>
-            }
+            <View style={styles.innerContainer}>
+                {
+                    renderBackNav &&
+                    <TouchableOpacity style={styles.leftAccesort} onPress={backNavigation}>
+                        <Fontisto name='arrow-left' size={20} />
+                    </TouchableOpacity>
+                }
+
+                <Text style={styles.title}>{title}</Text>
+                {
+                    imageName &&
+                    <TouchableOpacity style={styles.rightAccesory} onPress={renderRightAccesory}>
+                        <Fontisto name={imageName} size={20} />
+                    </TouchableOpacity>
+                }
+            </View>
         </View>
     )
 }
@@ -33,7 +44,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignContent: 'center',
         backgroundColor: "#e8eff8",
         shadowColor: "#365d90",
         shadowOffset: { width: 0, height: 2 },
@@ -42,13 +53,30 @@ const styles = StyleSheet.create({
         borderBottomEndRadius: 10,
         borderBottomStartRadius: 10,
     },
-    title: { fontSize: 20, fontWeight: 'bold' },
+    innerContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        justifyContent: 'center'
+    },
+    leftAccesort: {
+        width: 25,
+        height: 25,
+        position: 'absolute',
+        left: 10,
+        tintColor: '#000',
+        marginRight: 10,
+    },
     rightAccesory: {
         width: 25,
         height: 25,
         position: 'absolute',
         right: 10,
-        tintColor: '#000'
+        tintColor: '#000',
+        marginRight: 10,
     }
 
 })

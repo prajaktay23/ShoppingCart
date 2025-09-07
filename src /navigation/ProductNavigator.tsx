@@ -10,32 +10,39 @@ import Fontisto from "@react-native-vector-icons/fontisto";
 const Tab = createBottomTabNavigator<ProductTabParamList>();
 const Stack = createNativeStackNavigator<ProductStackParamList>();
 
-const TabNavigator = () => {
+const ProductBottomTabNavigator = () => {
     return (
-        <Tab.Navigator initialRouteName="Products" screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: true,
-            tabBarActiveTintColor: "#4a90e2",
-            tabBarInactiveTintColor: "gray",
-            tabBarStyle: {
-                backgroundColor: "#e8eff8",
-                borderTopLeftRadius: 12,
-                borderTopRightRadius: 12,
-                height: 60,
-            },
-        }}>
-            <Tab.Screen name="Products" component={ProductScreen} options={{
-                tabBarLabel: "Products",
-                tabBarIcon: () => (
-                    <Fontisto name="shopping-bag" size={20} />
-                ),
-            }} />
-            <Tab.Screen name="Users" component={UsersScreen} options={{
-                tabBarLabel: "Users",
-                tabBarIcon: () => (
-                    <Fontisto name="person" size={20} />
-                ),
-            }} />
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: true,
+                tabBarActiveTintColor: "#4a90e2",
+                tabBarInactiveTintColor: "gray",
+                tabBarStyle: {
+                    backgroundColor: "#e8eff8",
+                    borderTopLeftRadius: 12,
+                    borderTopRightRadius: 12,
+                    height: 60,
+                },
+            }}
+        >
+            <Tab.Screen
+                name="ProductList"
+                component={ProductNavigator}
+                options={{
+                    tabBarLabel: "Products",
+                    tabBarIcon: () => (
+                        <Fontisto name="shopping-bag" size={20} />
+                    ),
+                }} />
+            <Tab.Screen
+                name="Users"
+                component={UsersScreen}
+                options={{
+                    tabBarLabel: "Users",
+                    tabBarIcon: () => <Fontisto name="person" size={20} />,
+                }}
+            />
         </Tab.Navigator>
     );
 };
@@ -43,10 +50,9 @@ const TabNavigator = () => {
 const ProductNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="MainTabs" component={TabNavigator} />
+            <Stack.Screen name="Products" component={ProductScreen} />
             <Stack.Screen name="Cart" component={CartScreen} />
         </Stack.Navigator>
     );
 };
-
-export default ProductNavigator;
+export default ProductBottomTabNavigator;

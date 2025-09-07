@@ -27,7 +27,8 @@ const ProductScreen = () => {
         <SafeAreaView style={styles.constainer}>
             <NavBar
                 title="Products"
-                renderRightAccesory={renderRightAccesory} imageName="opencart"
+                renderRightAccesory={renderRightAccesory}
+                imageName="opencart"
             />
             <View style={styles.listView}>
                 <FlatList

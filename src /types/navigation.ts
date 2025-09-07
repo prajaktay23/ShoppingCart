@@ -9,11 +9,12 @@ export type AuthStackParamList = {
 };
 
 export type ProductTabParamList = {
-    Products: undefined;
+    ProductList: undefined;
     Users: undefined;
 };
 
 export type ProductStackParamList = {
-    MainTabs: undefined;
+    Products: undefined;
     Cart: undefined;
 };
+

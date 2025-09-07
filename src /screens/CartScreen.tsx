@@ -3,10 +3,17 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import NavBar from '../components/NavBar'
 import { useSelector } from 'react-redux'
-// import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
+import { ProductStackParamList } from '../types/navigation'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
+type CartScreenNavigationProp = NativeStackNavigationProp<
+    ProductStackParamList,
+    'Cart'
+>;
 
 const CartScreen = () => {
-    // const navigation = useNavigation();
+    const navigation = useNavigation<CartScreenNavigationProp>();
 
     const items = useSelector((state: any) => state.cart.items);
     console.log("Cart Items: ", items);
@@ -25,7 +32,7 @@ const CartScreen = () => {
     if (items.length === 0) {
         return (
             <SafeAreaView style={styles.container}>
-                <NavBar title="Cart" />
+                <NavBar title="Cart" renderBackNav={true} backNavigation={() => navigation.goBack()} />
                 <View style={styles.cartView}>
                     <Text style={styles.emptyCart}>Your cart is empty</Text>
                 </View>
@@ -35,7 +42,7 @@ const CartScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <NavBar title="Cart" />
+            <NavBar title="Cart" renderBackNav={true} backNavigation={() => navigation.goBack()} />
             <View style={styles.cartView}>
                 <View style={styles.header}>
                     <Text style={styles.countStyle}>Total: ${total.toFixed(2)}</Text>
