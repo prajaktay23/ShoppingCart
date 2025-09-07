@@ -40,13 +40,14 @@ const UsersScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <NavBar title="Users" />
-            <FlatList
-                data={users}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={renderItem}
-                style={styles.flatlist}
-                contentContainerStyle={styles.list}
-            />
+            <View style={{ width: '100%' }}>
+                <FlatList
+                    data={users}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem}
+                    contentContainerStyle={styles.list}
+                />
+            </View>
         </SafeAreaView>
     );
 };
@@ -56,8 +57,7 @@ export default UsersScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#c3daf6",
-        // padding: 12,
+        backgroundColor: "#e8eff8",
     },
     loader: {
         flex: 1,
@@ -65,7 +65,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     list: {
-        paddingBottom: 16,
+        paddingTop: 20,
+        paddingBottom: 10,
+        paddingHorizontal: 20,
+        backgroundColor: "#c3daf6",
     },
     card: {
         backgroundColor: "#8cacd5",
@@ -88,7 +91,4 @@ const styles = StyleSheet.create({
         marginTop: 40,
         color: "#999",
     },
-    flatlist: {
-        padding: 12,
-    }
 });

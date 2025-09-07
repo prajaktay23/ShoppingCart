@@ -12,70 +12,113 @@ const CartScreen = () => {
     console.log("Cart Items: ", items);
     const total = items.reduce((acc: number, item: any) => acc + item?.price, 0);
 
-
-    const renderAddToCartList = () => {
-        console.log("Add to cart pressed");
-        return (
-            <View>
-                <Text style={styles.countStyle}>Total: {total}</Text>
-                <FlatList
-                    data={items}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={styles.row}>
-                            <Image source={{ uri: item.image }} style={styles.image} />
-                            <Text>{item.title}</Text>
-                            <Text>{item.price}</Text>
-                        </View>
-                    )}
-                />
+    const renderItem = ({ item }: { item: any }) => (
+        <View style={styles.row}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <View style={styles.info}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.price}>${item.price}</Text>
             </View>
-        )
+        </View>
+    );
 
+    if (items.length === 0) {
+        return (
+            <SafeAreaView style={styles.container}>
+                <NavBar title="Cart" />
+                <View style={styles.cartView}>
+                    <Text style={styles.emptyCart}>Your cart is empty</Text>
+                </View>
+            </SafeAreaView>
+        );
     }
+
     return (
         <SafeAreaView style={styles.container}>
             <NavBar title="Cart" />
             <View style={styles.cartView}>
-                {total && renderAddToCartList()}
-                {!total && <Text style={styles.emptyCart}>Your cart is empty</Text>}
+                <View style={styles.header}>
+                    <Text style={styles.countStyle}>Total: ${total.toFixed(2)}</Text>
+                    <Text style={styles.subTitle}>Selected Items</Text>
+                </View>
+
+                <FlatList
+                    data={items}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={renderItem}
+                    ItemSeparatorComponent={() => <View style={styles.separator} />}
+                    contentContainerStyle={styles.listContent}
+                    initialNumToRender={8}
+                    maxToRenderPerBatch={8}
+                    windowSize={10}
+                    removeClippedSubviews
+                />
             </View>
         </SafeAreaView>
-    )
-}
+    );
+};
 
-export default CartScreen
+export default CartScreen;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#c3daf6",
-
-    },
-    emptyCart: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        marginTop: 20,
+        backgroundColor: "#e8eff8",
     },
     cartView: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: "#c3daf6",
+        paddingHorizontal: 20,
+    },
+    header: {
+        paddingVertical: 10,
     },
     countStyle: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: "bold",
+        marginBottom: 4,
+    },
+    subTitle: {
+        fontSize: 16,
+        marginBottom: 10,
+    },
+    separator: {
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: "#999",
     },
     row: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 10,
-        width: '100%',
+        paddingVertical: 10,
     },
     image: {
-        width: 50,
-        height: 50,
-        marginRight: 10
+        width: 80,
+        height: 80,
+        borderRadius: 10,
+        marginRight: 12,
+        borderWidth: 1,
+        borderColor: "#aaa",
+        backgroundColor: "#eee",
     },
-})
+    info: {
+        flex: 1,
+    },
+    title: {
+        fontSize: 15,
+        fontWeight: "600",
+    },
+    price: {
+        fontSize: 14,
+        color: "#4a90e2",
+        marginTop: 4,
+    },
+    listContent: {
+        paddingBottom: 20,
+    },
+    emptyCart: {
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+        marginTop: 40,
+    },
+});

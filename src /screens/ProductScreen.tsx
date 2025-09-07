@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import React, { useMemo } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { generateMockData } from '../utils/mockItemData'
@@ -29,20 +29,24 @@ const ProductScreen = () => {
                 title="Products"
                 renderRightAccesory={renderRightAccesory} imageName="opencart"
             />
-            <FlatList
-                keyExtractor={(item) => item.id.toString()}
-                data={data}
-                numColumns={2}
-                renderItem={({ item }) => <Item data={item} />}
-                getItemLayout={(_, index) => ({ length: 50, offset: 50 * index, index })}
-                initialNumToRender={20}
-                maxToRenderPerBatch={20}
-                windowSize={21}
-                style={styles.list}
-                contentContainerStyle={styles.listContent}
-                columnWrapperStyle={styles.column}
-            />
-
+            <View style={styles.listView}>
+                <FlatList
+                    keyExtractor={(item) => item.id.toString()}
+                    data={data}
+                    numColumns={2}
+                    renderItem={({ item }) => <Item data={item} />}
+                    getItemLayout={(_data, index) => ({
+                        length: 50,
+                        offset: 50 * index,
+                        index,
+                    })}
+                    initialNumToRender={20}
+                    maxToRenderPerBatch={20}
+                    windowSize={21}
+                    contentContainerStyle={styles.listContent}
+                    columnWrapperStyle={styles.column}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -52,15 +56,14 @@ export default ProductScreen
 const styles = StyleSheet.create({
     constainer: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: "#c3daf6",
-
+        backgroundColor: "#e8eff8",
     },
-    list: {
+    listView: {
         width: '100%',
     },
     listContent: {
+        paddingTop: 20,
+        paddingBottom: 10,
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#c3daf6",

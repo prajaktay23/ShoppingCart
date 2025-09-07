@@ -10,7 +10,11 @@ type Props = {
 const NavBar = ({ title, renderRightAccesory, imageName }: Props) => {
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+            <StatusBar
+                translucent
+                backgroundColor="transparent"
+                barStyle="dark-content"
+            />
             <Text style={styles.title}>{title}</Text>
             {
                 imageName &&
@@ -18,7 +22,6 @@ const NavBar = ({ title, renderRightAccesory, imageName }: Props) => {
                     <Fontisto name={imageName} size={20} />
                 </TouchableOpacity>
             }
-
         </View>
     )
 }
@@ -31,12 +34,13 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#ffffff',
-        marginBottom: 10,
+        backgroundColor: "#e8eff8",
+        shadowColor: "#365d90",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 1,
         borderBottomEndRadius: 10,
         borderBottomStartRadius: 10,
-        boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.3)',
-
     },
     title: { fontSize: 20, fontWeight: 'bold' },
     rightAccesory: {

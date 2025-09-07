@@ -17,7 +17,7 @@ const SplashScreen = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                await new Promise((resolve) => setTimeout(resolve, 1500));
+                await new Promise<void>((resolve) => setTimeout(() => resolve(), 1500));
 
                 const token = await AsyncStorage.getItem("authToken");
 
