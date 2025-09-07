@@ -8,7 +8,8 @@ All notable changes to this project will be documented in this file.
 - Fixed status bar UI 
 - Completed UI for bottom tab nav
 - fixed nav issue 
-- added left acessory for backnavigation in nav bar 
+- added left acessory for backnavigation in nav bar
+- created new user detail screen UI
 
 ## 2.0.0 - 5th-Sept-2025
 

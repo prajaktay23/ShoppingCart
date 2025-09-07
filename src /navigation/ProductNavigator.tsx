@@ -3,12 +3,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductScreen from "../screens/ProductScreen";
 import CartScreen from "../screens/CartScreen";
-import { ProductStackParamList, ProductTabParamList } from "../types/navigation";
+import { ProductStackParamList, ProductTabParamList, UsersStackParamList } from "../types/navigation";
 import UsersScreen from "../screens/UserScreen";
 import Fontisto from "@react-native-vector-icons/fontisto";
+import UsersDetailScreen from "../screens/UsersDetailScreen";
 
 const Tab = createBottomTabNavigator<ProductTabParamList>();
 const Stack = createNativeStackNavigator<ProductStackParamList>();
+const UsersStack = createNativeStackNavigator<UsersStackParamList>();
+
 
 const ProductBottomTabNavigator = () => {
     return (
@@ -36,8 +39,8 @@ const ProductBottomTabNavigator = () => {
                     ),
                 }} />
             <Tab.Screen
-                name="Users"
-                component={UsersScreen}
+                name="UsersList"
+                component={UsersNavigator}
                 options={{
                     tabBarLabel: "Users",
                     tabBarIcon: () => <Fontisto name="person" size={20} />,
@@ -46,6 +49,15 @@ const ProductBottomTabNavigator = () => {
         </Tab.Navigator>
     );
 };
+
+const UsersNavigator = () => {
+    return (
+        <UsersStack.Navigator screenOptions={{ headerShown: false }}>
+            <UsersStack.Screen name="Users" component={UsersScreen} />
+            <UsersStack.Screen name="UserDetail" component={UsersDetailScreen} />
+        </UsersStack.Navigator>
+    );
+}
 
 const ProductNavigator = () => {
     return (

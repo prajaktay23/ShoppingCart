@@ -5,13 +5,22 @@ import {
     StyleSheet,
     ActivityIndicator,
     FlatList,
+    TouchableOpacity,
 } from "react-native";
 import { useOfflineUsers } from "../hooks/useOfflineUsers";
-import { User } from "../types/user";
 import NavBar from "../components/NavBar";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import { UsersStackParamList } from "../types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { User } from "../types/User";
+
+type UserScreenRouteProp = NativeStackNavigationProp<UsersStackParamList, "UserDetail">;
 
 const UsersScreen = () => {
+
+    const navigation = useNavigation<UserScreenRouteProp>();
+
     const { users, loading } = useOfflineUsers();
 
     if (loading) {
@@ -31,10 +40,13 @@ const UsersScreen = () => {
     }
 
     const renderItem = ({ item }: { item: User }) => (
-        <View style={styles.card}>
+        <TouchableOpacity
+            style={styles.card}
+            onPress={() => navigation.navigate("UserDetail", { items: item })}
+        >
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.email}>{item.email}</Text>
-        </View>
+        </TouchableOpacity>
     );
 
     return (
@@ -71,7 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#c3daf6",
     },
     card: {
-        backgroundColor: "#8cacd5",
+        backgroundColor: "#3c86e8",
         padding: 16,
         marginBottom: 12,
         borderRadius: 8,
@@ -83,7 +95,7 @@ const styles = StyleSheet.create({
     },
     email: {
         fontSize: 14,
-        color: "#555",
+        color: "#030c17",
     },
     emptyText: {
         fontSize: 16,
