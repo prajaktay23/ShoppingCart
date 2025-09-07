@@ -2,13 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.0 - 6th-Sept-2025
+## 2.0.1 - 6th-Sept-2025
 
 # Fixed
 - Fixed status bar UI 
 - Completed UI for bottom tab nav
+- fixed nav issue 
+- added left acessory for backnavigation in nav bar 
 
-## 1.0.0 - 5th-Sept-2025
+## 2.0.0 - 5th-Sept-2025
 
 # Added
 - created store for cart items
