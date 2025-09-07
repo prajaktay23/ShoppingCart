@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - fixed nav issue 
 - added left acessory for backnavigation in nav bar
 - created new user detail screen UI
+- deep linking set up to open user deatils as per id
 
 ## 2.0.0 - 5th-Sept-2025
 

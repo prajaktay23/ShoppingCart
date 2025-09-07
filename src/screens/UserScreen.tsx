@@ -42,7 +42,7 @@ const UsersScreen = () => {
     const renderItem = ({ item }: { item: User }) => (
         <TouchableOpacity
             style={styles.card}
-            onPress={() => navigation.navigate("UserDetail", { items: item })}
+            onPress={() => navigation.navigate("UserDetail", { id: item.id.toString() })}
         >
             <Text style={styles.name}>{item.name}</Text>
             <Text style={styles.email}>{item.email}</Text>

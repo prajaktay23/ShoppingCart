@@ -1,5 +1,3 @@
-import { User } from "./User";
-
 export type RootStackParamList = {
     Splash: undefined;
     Auth: undefined;
@@ -22,6 +20,6 @@ export type ProductStackParamList = {
 
 export type UsersStackParamList = {
     Users: undefined;
-    UserDetail: { items: User }
+    UserDetail: { id: string }
 };
 

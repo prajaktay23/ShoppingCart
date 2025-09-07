@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { saveData, getData } from "../storage/asyncStorage";
-import { User } from "../types/user";
+import { User } from "../types/User";
 
 export const useOfflineUsers = () => {
     const [users, setUsers] = useState<User[]>([]);

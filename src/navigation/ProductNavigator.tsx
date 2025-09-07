@@ -25,7 +25,7 @@ const ProductBottomTabNavigator = () => {
                     backgroundColor: "#e8eff8",
                     borderTopLeftRadius: 12,
                     borderTopRightRadius: 12,
-                    height: 60,
+                    height: 80,
                 },
             }}
         >
