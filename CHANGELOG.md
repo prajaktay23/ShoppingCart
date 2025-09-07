@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.0 - 6th-Sept-2025
+
+# Fixed
+- Fixed status bar UI 
+- Completed UI for bottom tab nav
+
 ## 1.0.0 - 5th-Sept-2025
 
 # Added
