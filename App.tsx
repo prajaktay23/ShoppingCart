@@ -15,12 +15,8 @@ const App = () => {
           screens: {
             UsersList: {
               screens: {
-                Users: {
-                  screens: {
-                    UserDetail: 'user/:id',
-                  }
-                }
-              },
+                UserDetail: 'user/:id',
+              }
             },
           },
         },

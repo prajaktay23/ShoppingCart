@@ -46,7 +46,7 @@ const UsersDetailScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <NavBar title='User Detail' renderBackNav={true} backNavigation={() => navigation.goBack()} />
-            <View style={styles.listView}>.
+            <View style={styles.listView}>
                 {!user && <Text style={styles.text}>User not found. Login again.</Text>}
                 {user && <View style={styles.innerView}>
                     <Text style={styles.text}>{`Name: ${user?.name}`}</Text>
