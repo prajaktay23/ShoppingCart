@@ -12,6 +12,9 @@ const Tab = createBottomTabNavigator<ProductTabParamList>();
 const Stack = createNativeStackNavigator<ProductStackParamList>();
 const UsersStack = createNativeStackNavigator<UsersStackParamList>();
 
+const UIRender = ({ name, size }: any) => (
+    <Fontisto name={name} size={size} />
+);
 
 const ProductBottomTabNavigator = () => {
     return (
@@ -35,7 +38,7 @@ const ProductBottomTabNavigator = () => {
                 options={{
                     tabBarLabel: "Products",
                     tabBarIcon: () => (
-                        <Fontisto name="shopping-bag" size={20} />
+                        UIRender({ name: "shopping-bag", size: 20 })
                     ),
                 }} />
             <Tab.Screen
@@ -43,7 +46,9 @@ const ProductBottomTabNavigator = () => {
                 component={UsersNavigator}
                 options={{
                     tabBarLabel: "Users",
-                    tabBarIcon: () => <Fontisto name="person" size={20} />,
+                    tabBarIcon: () => (
+                        UIRender({ name: "person", size: 20 })
+                    ),
                 }}
             />
         </Tab.Navigator>
