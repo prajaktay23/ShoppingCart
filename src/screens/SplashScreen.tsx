@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useNavigation } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import EncryptedStorage from 'react-native-encrypted-storage';
 import { RootStackParamList } from "../types/navigation";
 import { Strings } from "../constants/Strings";
 
@@ -19,8 +19,8 @@ const SplashScreen = () => {
             try {
                 await new Promise<void>((resolve) => setTimeout(() => resolve(), 1500));
 
-                const token = await AsyncStorage.getItem("authToken");
-
+                const token = await EncryptedStorage.getItem("auth_token");
+                console.log(token, "token");
                 if (token) {
                     navigation.replace("Product");
                 } else {
