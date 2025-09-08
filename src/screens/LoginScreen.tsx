@@ -5,6 +5,7 @@ import EncryptedStorage from "react-native-encrypted-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types/navigation";
 import { Strings } from "../constants/Strings";
+import CustomButton from "../components/CustomButton";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -55,9 +56,7 @@ const LoginScreen = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>{Strings.LOGIN.WELCOME_MESSAGE}</Text>
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
-                <Text style={styles.buttonText}>{Strings.LOGIN.LOGIN}</Text>
-            </TouchableOpacity>
+            <CustomButton onClick={handleLogin} title={Strings.LOGIN.LOGIN} style={styles.button} />
             {
                 osVersion && <Text>
                     Native Fetched OS version: {osVersion}
