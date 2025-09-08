@@ -1,5 +1,5 @@
 import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import NavBar from '../components/NavBar'
 import { useSelector } from 'react-redux'
@@ -17,22 +17,32 @@ const CartScreen = () => {
 
     const items = useSelector((state: any) => state.cart.items);
     console.log("Cart Items: ", items);
-    const total = items.reduce((acc: number, item: any) => acc + item?.price, 0);
+    const total = useMemo(
+        () => items.reduce((acc: number, item: any) => acc + item?.price, 0),
+        [items]
+    );
 
-    const renderItem = ({ item }: { item: any }) => (
-        <View style={styles.row}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <View style={styles.info}>
-                <Text style={styles.title}>{item.title}</Text>
-                <Text style={styles.price}>${item.price}</Text>
+    const handleGoBack = useCallback(() => navigation.goBack(), [navigation]);
+
+    const renderSeparator = useCallback(() => <View style={styles.separator} />, []);
+
+    const renderItem = useCallback(
+        ({ item }: { item: any }) => (
+            <View style={styles.row}>
+                <Image source={{ uri: item.image }} style={styles.image} />
+                <View style={styles.info}>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.price}>${item.price}</Text>
+                </View>
             </View>
-        </View>
+        ),
+        []
     );
 
     if (items.length === 0) {
         return (
             <SafeAreaView style={styles.container}>
-                <NavBar title="Cart" renderBackNav={true} backNavigation={() => navigation.goBack()} />
+                <NavBar title="Cart" renderBackNav={true} backNavigation={handleGoBack} />
                 <View style={styles.cartView}>
                     <Text style={styles.emptyCart}>Your cart is empty</Text>
                 </View>
@@ -40,9 +50,10 @@ const CartScreen = () => {
         );
     }
 
+
     return (
         <SafeAreaView style={styles.container}>
-            <NavBar title="Cart" renderBackNav={true} backNavigation={() => navigation.goBack()} />
+            <NavBar title="Cart" renderBackNav={true} backNavigation={handleGoBack} />
             <View style={styles.cartView}>
                 <View style={styles.header}>
                     <Text style={styles.countStyle}>Total: ${total.toFixed(2)}</Text>
@@ -53,11 +64,17 @@ const CartScreen = () => {
                     data={items}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={renderItem}
-                    ItemSeparatorComponent={() => <View style={styles.separator} />}
+                    ItemSeparatorComponent={renderSeparator}
                     contentContainerStyle={styles.listContent}
                     initialNumToRender={8}
                     maxToRenderPerBatch={8}
                     windowSize={10}
+                    getItemLayout={(_data, index) => ({
+                        length: 80,
+                        offset: 80 * index,
+                        index,
+                    })}
+
                     removeClippedSubviews
                 />
             </View>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, NativeModules } from "react-native";
+import { View, Text, StyleSheet, Alert, NativeModules } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import EncryptedStorage from "react-native-encrypted-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";

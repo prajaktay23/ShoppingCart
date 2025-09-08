@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
     View,
     Text,
@@ -23,6 +23,19 @@ const UsersScreen = () => {
 
     const { users, loading } = useOfflineUsers();
 
+    const renderItem = useCallback(
+        ({ item }: { item: User }) => (
+            <TouchableOpacity
+                style={styles.card}
+                onPress={() => navigation.navigate("UserDetail", { id: item.id.toString() })}
+            >
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.email}>{item.email}</Text>
+            </TouchableOpacity>
+        ),
+        [navigation]
+    );
+
     if (loading) {
         return (
             <View style={styles.loader}>
@@ -39,16 +52,6 @@ const UsersScreen = () => {
         );
     }
 
-    const renderItem = ({ item }: { item: User }) => (
-        <TouchableOpacity
-            style={styles.card}
-            onPress={() => navigation.navigate("UserDetail", { id: item.id.toString() })}
-        >
-            <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.email}>{item.email}</Text>
-        </TouchableOpacity>
-    );
-
     return (
         <SafeAreaView style={styles.container}>
             <NavBar title="Users" />
@@ -58,6 +61,12 @@ const UsersScreen = () => {
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={renderItem}
                     contentContainerStyle={styles.list}
+                    getItemLayout={(_data, index) => ({
+                        length: 80,
+                        offset: 80 * index,
+                        index,
+                    })}
+
                 />
             </View>
         </SafeAreaView>
