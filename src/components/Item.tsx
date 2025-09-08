@@ -3,6 +3,7 @@ import React, { useCallback } from 'react'
 import CustomButton from './CustomButton'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../state/cartSlice'
+import Toast from 'react-native-toast-message';
 
 type ItemProps = {
     data: {
@@ -17,17 +18,23 @@ const Item = React.memo(({ data }: ItemProps) => {
 
     const handleAddToCart = useCallback(() => {
         console.log(`Added ${data.title} to cart`);
+        Toast.show({
+            type: 'success',
+            text1: 'Added to Cart',
+            text2: `${data.title} has been added to your cart.`,
+            position: 'bottom',
+            visibilityTime: 2000,
+        });
         dispatch(addToCart(data));
-
     }, [data, dispatch]);
 
     return (
         <View style={styles.container}>
-            <Image src={data.image} style={styles.image} />
+            <Image source={{ uri: data.image }} style={styles.image} />
             <Text style={styles.title}>{data.title}</Text>
             <Text style={styles.title}>{data.price}</Text>
 
-            <CustomButton onClick={() => handleAddToCart()} title={"Add to Cart"} />
+            <CustomButton onClick={handleAddToCart} title={"Add to Cart"} />
         </View>
     )
 });

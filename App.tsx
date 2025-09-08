@@ -4,6 +4,7 @@ import RootNavigator from './src/navigation/RootNavigator'
 import { Provider } from 'react-redux'
 import { store } from './src/state/store'
 import { RootStackParamList } from './src/types/navigation'
+import Toast from 'react-native-toast-message';
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
       <NavigationContainer linking={linking}>
         <RootNavigator />
       </NavigationContainer>
+      <Toast />
     </Provider>
   )
 }

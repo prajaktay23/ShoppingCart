@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View } from 'react-native'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { generateMockData } from '../utils/mockItemData'
 import Item from '../components/Item'
@@ -18,10 +18,10 @@ const ProductScreen = () => {
 
     const data = useMemo(() => generateMockData(5000), []);
 
-    const renderRightAccesory = () => {
+    const renderRightAccesory = useCallback(() => {
         console.log("Right Accesory Pressed");
         navigation.navigate('Cart');
-    }
+    }, [navigation])
 
     return (
         <SafeAreaView style={styles.constainer}>
