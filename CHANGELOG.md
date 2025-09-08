@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.2 - 6th-Sept-2025
+
+# Fixed
+- Done bridging setup to fetch android os version
+
 ## 2.0.1 - 6th-Sept-2025
 
 # Fixed
