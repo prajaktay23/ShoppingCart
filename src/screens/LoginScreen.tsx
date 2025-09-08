@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, NativeModules } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import EncryptedStorage from "react-native-encrypted-storage";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -13,6 +13,29 @@ type LoginScreenNavigationProp = NativeStackNavigationProp<
 
 const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProp>();
+    const [osVersion, setOsVersion] = useState('');
+
+    const { CustomDeviceInfo } = NativeModules;
+
+    useEffect(() => {
+        if (CustomDeviceInfo?.getConstants) {
+            const constants = CustomDeviceInfo.getConstants();
+            console.log("CustomDeviceInfo constants:", constants);
+
+            if (constants?.osVersion) {
+                setOsVersion(constants.osVersion);
+            } else {
+                console.error("osVersion missing in constants");
+            }
+        }
+    }, []);
+
+
+    useEffect(() => {
+        console.log("Updated osVersion:", osVersion);
+    }, [osVersion]);
+
+
 
     const handleLogin = async () => {
         try {
@@ -35,6 +58,11 @@ const LoginScreen = () => {
             <TouchableOpacity style={styles.button} onPress={handleLogin}>
                 <Text style={styles.buttonText}>{Strings.LOGIN.LOGIN}</Text>
             </TouchableOpacity>
+            {
+                osVersion && <Text>
+                    Native Fetched OS version: {osVersion}
+                </Text>
+            }
         </View>
     );
 };
