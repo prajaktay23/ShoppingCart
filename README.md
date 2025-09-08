@@ -3,8 +3,9 @@
 - Bug fix 
     - adding keyExtractor for optimizations and to keep track of unique elements 
     - destructuring the item in renderItem correctly 
-    
-```<FlatList
+
+```
+<FlatList
   data={data}
   keyExtractor={(item, index) => index.toString()}
   renderItem={({ item }) => (
@@ -12,5 +13,6 @@
       {item.title}
     </Text>
   )}
-/>```
+/>
+```
 
