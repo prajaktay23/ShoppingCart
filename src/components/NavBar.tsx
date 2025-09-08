@@ -29,7 +29,7 @@ const NavBar = ({ title, renderRightAccesory, imageName, renderBackNav, backNavi
                 {
                     imageName &&
                     <TouchableOpacity style={styles.rightAccesory} onPress={renderRightAccesory}>
-                        <Fontisto name={imageName} size={20} />
+                        <Fontisto name={imageName as any} size={20} />
                     </TouchableOpacity>
                 }
             </View>
